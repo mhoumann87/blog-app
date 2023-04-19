@@ -1,5 +1,4 @@
 import Header from './components/Header';
-import Nav from './components/Nav';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import NewPost from './components/NewPost';
@@ -14,7 +13,6 @@ function App() {
   return (
     <>
       <Header />
-      <Nav />
 
       <Switch>
         <Route exact path='/'>

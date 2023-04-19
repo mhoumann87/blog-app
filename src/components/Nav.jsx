@@ -1,7 +1,7 @@
 const Nav = () => {
   return (
     <nav>
-      <ul>
+      <ul className='flex'>
         <li>Home</li>
         <li>New Post</li>
         <li>About</li>

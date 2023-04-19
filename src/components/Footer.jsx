@@ -3,12 +3,14 @@ const Footer = () => {
 
   return (
     <footer>
-      <p>
-        Copyright &copy;{year}&nbsp;
-        <a href='https://www.michael-h.dk' target='_blank' rel='noreferrer'>
-          Michael Houmann
-        </a>
-      </p>
+      <div className='container'>
+        <p>
+          Copyright &copy;{year}&nbsp;
+          <a href='https://www.michael-h.dk' target='_blank' rel='noreferrer'>
+            Michael Houmann
+          </a>
+        </p>
+      </div>
     </footer>
   );
 };

@@ -1,7 +1,12 @@
+import Nav from './Nav';
+
 const Header = () => {
   return (
     <header>
-      <h1>Blog App</h1>
+      <div className='container flex'>
+        <h1>Blog App</h1>
+        <Nav />
+      </div>
     </header>
   );
 };
