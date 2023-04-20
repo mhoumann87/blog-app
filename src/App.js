@@ -6,31 +6,26 @@ import PostPage from './components/PostPage';
 import About from './components/About';
 import Missing from './components/Missing';
 
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function App() {
+  const [search, setSearch] = useState('');
   return (
     <>
-      <Header />
+      <Header title={'Blog APP'} search={search} setSearch={setSearch} />
 
-      <Switch>
-        <Route exact path='/'>
-          <Home />
-        </Route>
+      <Routes>
+        <Route path='/' element={<Home />} />
 
-        <Route exact path='/post'>
-          <PostPage />
-        </Route>
+        <Route path='post' element={<NewPost />} />
 
-        <Route path='/post:id'>
-          <NewPost />
-        </Route>
+        <Route path='/post:id' element={<PostPage />} />
 
-        <Route path='/about' component={About} />
+        <Route path='/about' element={<About />} />
 
-        <Route path='*' component={Missing} />
-      </Switch>
+        <Route path='*' element={<Missing />} />
+      </Routes>
       <Footer />
     </>
   );

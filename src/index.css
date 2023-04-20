@@ -86,6 +86,15 @@ main,
   gap: 1rem;
 }
 
+.sr-only {
+  width: 0;
+  height: 0;
+  display: none;
+  position: absolute;
+  top: -100%;
+  left: -100%;
+}
+
 /* base stules */
 
 h1,
@@ -132,6 +141,20 @@ footer {
   padding-block: 0.5rem;
 }
 
+header .container {
+  --flex-dir: column;
+}
+
+@media screen and (min-width: 680px) {
+  header .container {
+    --flex-dir: row;
+  }
+}
+
+.nav-box {
+  --flex-dir: row;
+}
+
 nav ul {
   list-style: none;
   padding-left: 0;
@@ -139,6 +162,15 @@ nav ul {
 
 nav ul li {
   font-size: var(--fs-medium);
+  font-family: var(--ff-headdings);
+  text-transform: uppercase;
+  margin-right: 1rem;
+}
+
+nav input {
+  font-size: var(--fs-regular);
+  padding: 0.15rem;
+  border-radius: 7px;
 }
 
 footer .container {

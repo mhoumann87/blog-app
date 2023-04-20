@@ -1,11 +1,34 @@
-const Nav = () => {
+import { Link } from 'react-router-dom';
+
+const Nav = ({ search, setSearch }) => {
   return (
     <nav>
-      <ul className='flex'>
-        <li>Home</li>
-        <li>New Post</li>
-        <li>About</li>
-      </ul>
+      <div className='nav-box flex'>
+        <ul className='flex'>
+          <li>
+            <Link to='/'>Home</Link>
+          </li>
+          <li>
+            <Link to='post'>New Post</Link>
+          </li>
+          <li>
+            <Link to='about'>About</Link>
+          </li>
+        </ul>
+        <form className='search-form' onAbort={e => e.preventDefault()}>
+          <label htmlFor='search' className='sr-only'>
+            search posts
+          </label>
+          <input
+            type='text'
+            id='search'
+            name='search'
+            placeholder='Search Posts'
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+        </form>
+      </div>
     </nav>
   );
 };
