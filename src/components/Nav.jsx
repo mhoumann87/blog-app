@@ -6,13 +6,13 @@ const Nav = ({ search, setSearch }) => {
       <div className='nav-box flex'>
         <ul className='flex'>
           <li>
-            <Link to='/'>Home</Link>
+            <Link to={'/'}>Home</Link>
           </li>
           <li>
-            <Link to='post'>New Post</Link>
+            <Link to={'/post'}>New Post</Link>
           </li>
           <li>
-            <Link to='about'>About</Link>
+            <Link to={'/about'}>About</Link>
           </li>
         </ul>
         <form className='search-form' onAbort={e => e.preventDefault()}>

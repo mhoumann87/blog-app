@@ -16,9 +16,9 @@ function App() {
       <Header title={'Blog APP'} search={search} setSearch={setSearch} />
 
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/*' element={<Home />} />
 
-        <Route path='post' element={<NewPost />} />
+        <Route path='/post' element={<NewPost />} />
 
         <Route path='/post:id' element={<PostPage />} />
 

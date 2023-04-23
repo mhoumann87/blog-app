@@ -145,6 +145,16 @@ header .container {
   --flex-dir: column;
 }
 
+header a {
+  color: var(--clr-light-text);
+  text-decoration: none;
+  transition: color 400ms ease;
+}
+
+header a:where(:hover, :focus-visible) {
+  color: var(--clr-link);
+}
+
 @media screen and (min-width: 680px) {
   header .container {
     --flex-dir: row;
@@ -165,6 +175,7 @@ nav ul li {
   font-family: var(--ff-headdings);
   text-transform: uppercase;
   margin-right: 1rem;
+  cursor: pointer;
 }
 
 nav input {
