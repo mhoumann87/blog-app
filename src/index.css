@@ -145,6 +145,14 @@ header .container {
   --flex-dir: column;
 }
 
+header div .nav-box {
+  --flex-dir: column;
+}
+
+header div .nav-list {
+  --flex-dir: row;
+}
+
 header a {
   color: var(--clr-light-text);
   text-decoration: none;
@@ -159,10 +167,10 @@ header a:where(:hover, :focus-visible) {
   header .container {
     --flex-dir: row;
   }
-}
 
-.nav-box {
-  --flex-dir: row;
+  header div .nav-box {
+    --flex-dir: row;
+  }
 }
 
 nav ul {
