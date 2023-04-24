@@ -61,8 +61,7 @@ body {
 main,
 .container {
   width: calc(100% - 1.5rem);
-  margin-block-start: 1rem;
-  margin-inline: auto;
+  margin: 1rem auto;
 }
 
 @media screen and (min-width: 650px) {
@@ -84,7 +83,7 @@ main,
   flex-direction: var(--flex-dir, row);
   justify-content: var(--flex-justify, space-between);
   align-items: var(--flex-align, center);
-  gap: 1rem;
+  gap: var(--gap, 1rem);
 }
 
 .sr-only {
@@ -237,7 +236,7 @@ nav input {
   border: 3px solid var(--clr-accent);
 }
 
-/* Posts page */
+/* NewPost page */
 .new-post-form {
   --flex-dir: column;
   --flex-align: stretch;
@@ -290,6 +289,42 @@ nav input {
   }
 }
 
+/* PostPage */
+
+.single-post {
+  max-width: 65ch;
+  border: 1px solid var(--clr-light-text);
+  border-radius: 5px;
+}
+
+.header-box {
+  --flex-dir: column;
+  --gap: 0;
+  --flex-align: flex-end;
+  margin: 0 0 1rem 0;
+  background: var(--clr-light-text);
+  padding: 1rem;
+}
+
+@media screen and (min-width: 700px) {
+  .header-box {
+    --flex-dir: row;
+  }
+}
+
+.post-body {
+  padding: 1rem;
+}
+
+.post-body button {
+  margin-block: 1rem;
+  font-size: var(--fs-regular);
+  color: var(--clr-background);
+  background-color: red;
+  padding: 0.25rem 0.75rem;
+  border: none;
+  border-radius: 5px;
+}
 /* footer */
 
 footer .container {
