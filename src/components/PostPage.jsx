@@ -24,12 +24,18 @@ const PostPage = ({ posts, handelDelete }) => {
         )}
         {!post && (
           <>
-            <h3>The post in nowhere to find</h3>
-            <p>
-              That is truly embarrassing, and I will go to my corner and think
-              about what I have done{' '}
-            </p>
-            <Link to={'/'}>Instead you can visit our frontpage</Link>
+            <div className='header-box flex'>
+              <h3>The post in nowhere to find</h3>
+            </div>
+            <div className='post-body'>
+              <p>
+                That is truly embarrassing, and I will go to my corner and think
+                about what I have done{' '}
+              </p>
+              <Link to={'/'} className='home-link'>
+                Instead you can visit our frontpage
+              </Link>
+            </div>
           </>
         )}
       </article>
