@@ -9,7 +9,7 @@ const NewPost = ({
     <main className='new-post'>
       <h2>Add post</h2>
 
-      <form className='new-post-form' onSubmit={handleSubmit}>
+      <form className='new-post-form flex' onSubmit={handleSubmit}>
         <label className='small' htmlFor='post-title'>
           Post Title
         </label>
@@ -31,7 +31,9 @@ const NewPost = ({
           value={postBody}
           onChange={e => setPostBody(e.target.value)}
         />
-        <button type='submit'>Submit</button>
+        <button type='submit' className='shadow'>
+          Submit
+        </button>
       </form>
     </main>
   );
