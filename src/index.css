@@ -144,6 +144,8 @@ p {
 
 /* Components */
 
+/* Header & navigation */
+
 header,
 footer {
   background-color: var(--clr-accent);
@@ -207,9 +209,32 @@ nav input {
   margin-block-end: 1rem;
 }
 
-footer .container {
-  display: flex;
-  justify-content: center;
+/* Home page */
+
+@media screen and (min-width: 600px) {
+  .blog-posts {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .blog-posts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .blog-posts {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.post {
+  --flex-dir: column;
+
+  justify-self: center;
+  padding: 1rem;
+  border: 3px solid var(--clr-accent);
 }
 
 /* Posts page */
@@ -263,4 +288,11 @@ footer .container {
   .new-post {
     width: min(80%, 680px);
   }
+}
+
+/* footer */
+
+footer .container {
+  display: flex;
+  justify-content: center;
 }

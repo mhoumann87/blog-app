@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Post = ({ post }) => {
   return (
-    <article key={post.id} className='post'>
+    <article key={post.id} className='post flex shadow'>
       <Link to={`/post/${post.id}`}>
         <h3>{post.title}</h3>
         <p className='small'>Post date: {post.datetime}</p>
