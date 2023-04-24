@@ -7,6 +7,7 @@ import About from './components/About';
 import Missing from './components/Missing';
 
 import { format } from 'date-fns';
+import api from './api/posts';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -29,6 +30,25 @@ function App() {
 
     setSearchResults(filteredResults.reverse());
   }, [posts, search]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await api.get('/posts');
+        setPosts(response.data);
+      } catch (err) {
+        if (err.response) {
+          // Not in the 200 response range
+          console.log(err.response.data);
+          console.log(err.response.status);
+          console.log(err.response.headers);
+        } else {
+          console.log(`Error: ${err.message}`);
+        }
+      }
+    };
+    fetchPosts();
+  }, []);
 
   const handleSubmit = e => {
     e.preventDefault();
