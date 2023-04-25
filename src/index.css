@@ -341,6 +341,21 @@ nav input {
   place-items: center;
 }
 
+.post-body .del-but {
+  color: var(--clr-background);
+  background-color: rgb(192, 1, 1);
+}
+
+.post-body .edit-but {
+  color: var(--clr-background);
+  background-color: rgb(1, 100, 1);
+}
+
+/* Edit post page */
+.no-edit {
+  place-items: center;
+}
+
 .missing-page {
   text-align: center;
 }
