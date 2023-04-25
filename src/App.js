@@ -76,11 +76,18 @@ function App() {
     }
   };
 
-  const handleDelete = id => {
-    const postsList = posts.filter(post => post.id !== id);
-
-    setPosts(postsList);
-    navigate('/');
+  const handleDelete = async id => {
+    try {
+      await api.delete(`/posts/${id}`);
+      // Filter out the deleted post
+      const postsList = posts.filter(post => post.id !== id);
+      // update the posts list
+      setPosts(postsList);
+      //return to frontpage
+      navigate('/');
+    } catch (err) {
+      console.log(`Error: ${err}`);
+    }
   };
 
   return (
