@@ -270,7 +270,7 @@ nav input {
 
 .new-post-form button {
   align-self: flex-start;
-  background: var(--clr-accent);
+  background-color: var(--clr-accent);
   color: var(--clr-background);
   font-size: var(--fs-regular);
   padding: 0.5rem 0.75rem;
@@ -324,6 +324,7 @@ nav input {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 400ms ease;
 }
 
 .post-body .del-but {
@@ -331,24 +332,18 @@ nav input {
   background-color: rgb(192, 1, 1);
 }
 
-.post-body .edit-but {
-  color: var(--clr-background);
-  background-color: rgb(1, 100, 1);
-}
-
-/* Edit post page */
-.no-edit {
-  place-items: center;
-}
-
-.post-body .del-but {
-  color: var(--clr-background);
-  background-color: rgb(192, 1, 1);
+.post-body .del-but:where(:hover, :focus-visible) {
+  background-color: rgba(192, 1, 1, 0.8);
 }
 
 .post-body .edit-but {
   color: var(--clr-background);
-  background-color: rgb(1, 100, 1);
+  background-color: var(--clr-accent);
+}
+
+.post-body .edit-but:where(:hover, :focus-visible) {
+  color: var(--clr-text);
+  background-color: var(--clr-link);
 }
 
 /* Edit post page */
