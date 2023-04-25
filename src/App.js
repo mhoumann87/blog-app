@@ -50,7 +50,7 @@ function App() {
     fetchPosts();
   }, []);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     // Set and id based on the previous posts
@@ -59,15 +59,21 @@ function App() {
     const datetime = format(new Date(), 'MMMM dd yyyy pp');
     // create the new post
     const newPost = { id, title: postTitle, datetime, body: postBody };
-    // create a new array with all posts
-    const allPosts = [...posts, newPost];
-    // update the post array
-    setPosts(allPosts);
-    // Clear the fields in the form
-    setPostTitle('');
-    setPostBody('');
-    // Go back to the frontpage
-    navigate('/');
+    // Update the database
+    try {
+      const response = await api.post('/posts', newPost);
+      // create a new array with all posts
+      const allPosts = [...posts, response.data];
+      // update the post array
+      setPosts(allPosts);
+      // Clear the fields in the form
+      setPostTitle('');
+      setPostBody('');
+      // Go back to the frontpage
+      navigate('/');
+    } catch (err) {
+      console.log(`Error: ${err}`);
+    }
   };
 
   const handleDelete = id => {
