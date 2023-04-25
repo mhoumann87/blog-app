@@ -320,11 +320,25 @@ nav input {
 .post-body button {
   margin-block: 1rem;
   font-size: var(--fs-regular);
-  color: var(--clr-background);
-  background-color: red;
   padding: 0.25rem 0.75rem;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.post-body .del-but {
+  color: var(--clr-background);
+  background-color: rgb(192, 1, 1);
+}
+
+.post-body .edit-but {
+  color: var(--clr-background);
+  background-color: rgb(1, 100, 1);
+}
+
+/* Edit post page */
+.no-edit {
+  place-items: center;
 }
 
 .missing-page {

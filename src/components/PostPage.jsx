@@ -16,9 +16,16 @@ const PostPage = ({ posts, handelDelete }) => {
             </div>
             <div className='post-body'>
               <p>{post.body}</p>
-              <button className='shadow' onClick={() => handelDelete(post.id)}>
-                Delete Post
-              </button>
+              <div className='flex'>
+                <Link to={`/edit/${post.id}`}>
+                  <button className='edit-but shadow'>Edit Post</button>
+                </Link>
+                <button
+                  className='del-but shadow'
+                  onClick={() => handelDelete(post.id)}>
+                  Delete Post
+                </button>
+              </div>
             </div>
           </>
         )}

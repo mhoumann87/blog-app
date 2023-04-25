@@ -3,6 +3,7 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import NewPost from './components/NewPost';
 import PostPage from './components/PostPage';
+import EditPost from './components/EditPost';
 import About from './components/About';
 import Missing from './components/Missing';
 
@@ -14,10 +15,11 @@ import { useState, useEffect } from 'react';
 function App() {
   const [search, setSearch] = useState('');
   const [posts, setPosts] = useState([]);
-
   const [searchResults, setSearchResults] = useState([]);
   const [postTitle, setPostTitle] = useState('');
   const [postBody, setPostBody] = useState('');
+  const [editTitle, setEditTitle] = useState('');
+  const [editBody, setEditBody] = useState('');
 
   const navigate = useNavigate();
 
@@ -76,6 +78,23 @@ function App() {
     }
   };
 
+  const handleEdit = async id => {
+    const datetime = format(new Date(), 'MMMM dd, yyyy pp');
+    const editedPost = { id, title: editTitle, datetime, body: editBody };
+
+    try {
+      const response = await api.put(`/posts/${id}`, editedPost);
+      setPosts(
+        posts.map(post => (post.id === id ? { ...response.data } : post))
+      );
+      setEditTitle('');
+      setEditBody('');
+      navigate('/');
+    } catch (err) {
+      console.log(`Error: ${err}`);
+    }
+  };
+
   const handleDelete = async id => {
     try {
       await api.delete(`/posts/${id}`);
@@ -106,6 +125,20 @@ function App() {
               postBody={postBody}
               setPostBody={setPostBody}
               handleSubmit={handleSubmit}
+            />
+          }
+        />
+
+        <Route
+          path={'/edit/:id'}
+          element={
+            <EditPost
+              posts={posts}
+              editTitle={editTitle}
+              setEditTitle={setEditTitle}
+              editBody={editBody}
+              setEditBody={setEditBody}
+              handleEdit={handleEdit}
             />
           }
         />
