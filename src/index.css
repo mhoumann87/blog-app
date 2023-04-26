@@ -156,6 +156,11 @@ header .container {
   --flex-dir: column;
 }
 
+header .icon {
+  width: var(--fs-xlarge);
+  display: inline-block;
+}
+
 header div .nav-box {
   --flex-dir: column;
 }

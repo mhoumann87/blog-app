@@ -9,6 +9,8 @@ import Missing from './components/Missing';
 
 import { format } from 'date-fns';
 import api from './api/posts';
+import useWindowSize from './hooks/useWindowSize';
+
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -22,6 +24,8 @@ function App() {
   const [editBody, setEditBody] = useState('');
 
   const navigate = useNavigate();
+
+  const { width } = useWindowSize();
 
   useEffect(() => {
     const filteredResults = posts.filter(
@@ -111,7 +115,12 @@ function App() {
 
   return (
     <>
-      <Header title={'Blog APP'} search={search} setSearch={setSearch} />
+      <Header
+        title={'Blog APP'}
+        search={search}
+        setSearch={setSearch}
+        width={width}
+      />
 
       <Routes>
         <Route path='/' element={<Home posts={searchResults} />} />
