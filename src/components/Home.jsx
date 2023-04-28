@@ -1,16 +1,23 @@
 import Feed from './Feed';
 
-const Home = ({ posts }) => {
+const Home = ({ posts, fetchError, isLoading }) => {
   return (
     <main className='home'>
-      <h2>Our Blog Posts</h2>
-      <div className='blog-posts grid'>
-        {posts.length ? (
-          <Feed posts={posts} />
-        ) : (
-          <h2>There are no posts at this moment</h2>
-        )}
-      </div>
+      {isLoading && (
+        <div className='spinner-box grid'>
+          <div className='spinner'></div>
+        </div>
+      )}
+
+      {fetchError && <h3 className='error'>Error: {fetchError}</h3>}
+
+      {!isLoading && !fetchError && posts.length ? (
+        <div className='blog-posts grid'>
+          <Feed className='post' posts={posts} />
+        </div>
+      ) : (
+        <h3>No Posts To Show</h3>
+      )}
     </main>
   );
 };
