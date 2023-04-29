@@ -1,13 +1,30 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
+import api from '../api/posts';
 import DataContext from '../context/DataContext';
 
 const PostPage = () => {
-  const { posts, handleDelete } = useContext(DataContext);
+  const { posts, setPosts } = useContext(DataContext);
+
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
   const post = posts.find(post => post.id.toString() === id);
+
+  const handleDelete = async id => {
+    try {
+      await api.delete(`/posts/${id}`);
+      // Filter out the deleted post
+      const postsList = posts.filter(post => post.id !== id);
+      // update the posts list
+      setPosts(postsList);
+      //return to frontpage
+      navigate('/');
+    } catch (err) {
+      console.log(`Error: ${err}`);
+    }
+  };
 
   return (
     <main className='single-post shadow'>
