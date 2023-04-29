@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 import { FaLaptop, FaTabletAlt, FaMobileAlt } from 'react-icons/fa';
+import { useContext } from 'react';
+import DataContext from '../context/DataContext';
 
 import Nav from './Nav';
 
-const Header = ({ title, search, setSearch, width }) => {
+const Header = ({ title, search, setSearch }) => {
+  const { width } = useContext(DataContext);
   return (
     <header>
       <div className='container flex'>
@@ -20,7 +23,7 @@ const Header = ({ title, search, setSearch, width }) => {
           )}
         </div>
 
-        <Nav search={search} setSearch={setSearch} />
+        <Nav />
       </div>
     </header>
   );

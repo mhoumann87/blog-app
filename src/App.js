@@ -6,161 +6,31 @@ import PostPage from './components/PostPage';
 import EditPost from './components/EditPost';
 import About from './components/About';
 import Missing from './components/Missing';
+import { DataProvider } from './context/DataContext';
 
-import { format } from 'date-fns';
-import api from './api/posts';
-import useWindowSize from './hooks/useWindowSize';
-import useAxiosFetch from './hooks/useAxiosFetch';
-
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
-  const [search, setSearch] = useState('');
-  const [posts, setPosts] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
-  const [postTitle, setPostTitle] = useState('');
-  const [postBody, setPostBody] = useState('');
-  const [editTitle, setEditTitle] = useState('');
-  const [editBody, setEditBody] = useState('');
-
-  const navigate = useNavigate();
-
-  const { width } = useWindowSize();
-
-  const { data, fetchError, isLoading } = useAxiosFetch(
-    'http://localhost:3500/posts'
-  );
-
-  useEffect(() => {
-    setPosts(data);
-  }, [data]);
-
-  useEffect(() => {
-    const filteredResults = posts.filter(
-      post =>
-        post.body.toLowerCase().includes(search.toLowerCase()) ||
-        post.title.toLowerCase().includes(search.toLowerCase())
-    );
-
-    setSearchResults(filteredResults.reverse());
-  }, [posts, search]);
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    // Set and id based on the previous posts
-    const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
-    // Find datetime
-    const datetime = format(new Date(), 'MMMM dd yyyy pp');
-    // create the new post
-    const newPost = { id, title: postTitle, datetime, body: postBody };
-    // Update the database
-    try {
-      const response = await api.post('/posts', newPost);
-      // create a new array with all posts
-      const allPosts = [...posts, response.data];
-      // update the post array
-      setPosts(allPosts);
-      // Clear the fields in the form
-      setPostTitle('');
-      setPostBody('');
-      // Go back to the frontpage
-      navigate('/');
-    } catch (err) {
-      console.log(`Error: ${err}`);
-    }
-  };
-
-  const handleEdit = async id => {
-    const datetime = format(new Date(), 'MMMM dd, yyyy pp');
-    const editedPost = { id, title: editTitle, datetime, body: editBody };
-
-    try {
-      const response = await api.put(`/posts/${id}`, editedPost);
-      setPosts(
-        posts.map(post => (post.id === id ? { ...response.data } : post))
-      );
-      setEditTitle('');
-      setEditBody('');
-      navigate('/');
-    } catch (err) {
-      console.log(`Error: ${err}`);
-    }
-  };
-
-  const handleDelete = async id => {
-    try {
-      await api.delete(`/posts/${id}`);
-      // Filter out the deleted post
-      const postsList = posts.filter(post => post.id !== id);
-      // update the posts list
-      setPosts(postsList);
-      //return to frontpage
-      navigate('/');
-    } catch (err) {
-      console.log(`Error: ${err}`);
-    }
-  };
-
   return (
     <>
-      <Header
-        title={'Blog APP'}
-        search={search}
-        setSearch={setSearch}
-        width={width}
-      />
+      <DataProvider>
+        <Header title={'Blog APP'} />
 
-      <Routes>
-        <Route
-          path='/'
-          element={
-            <Home
-              posts={searchResults}
-              fetchError={fetchError}
-              isLoading={isLoading}
-            />
-          }
-        />
+        <Routes>
+          <Route path='/' element={<Home />} />
 
-        <Route
-          path='/post'
-          element={
-            <NewPost
-              postTitle={postTitle}
-              setPostTitle={setPostTitle}
-              postBody={postBody}
-              setPostBody={setPostBody}
-              handleSubmit={handleSubmit}
-            />
-          }
-        />
+          <Route path='/post' element={<NewPost />} />
 
-        <Route
-          path={'/edit/:id'}
-          element={
-            <EditPost
-              posts={posts}
-              editTitle={editTitle}
-              setEditTitle={setEditTitle}
-              editBody={editBody}
-              setEditBody={setEditBody}
-              handleEdit={handleEdit}
-            />
-          }
-        />
+          <Route path={'/edit/:id'} element={<EditPost />} />
 
-        <Route
-          path='/post/:id'
-          element={<PostPage posts={posts} handelDelete={handleDelete} />}
-        />
+          <Route path='/post/:id' element={<PostPage />} />
 
-        <Route path='/about' element={<About />} />
+          <Route path='/about' element={<About />} />
 
-        <Route path='*' element={<Missing />} />
-      </Routes>
-      <Footer />
+          <Route path='*' element={<Missing />} />
+        </Routes>
+        <Footer />
+      </DataProvider>
     </>
   );
 }

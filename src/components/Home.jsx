@@ -1,6 +1,10 @@
 import Feed from './Feed';
+import { useContext } from 'react';
+import DataContext from '../context/DataContext';
 
-const Home = ({ posts, fetchError, isLoading }) => {
+const Home = () => {
+  const { searchResults, fetchError, isLoading } = useContext(DataContext);
+
   return (
     <main className='home'>
       {isLoading && (
@@ -11,9 +15,9 @@ const Home = ({ posts, fetchError, isLoading }) => {
 
       {fetchError && <h3 className='error'>Error: {fetchError}</h3>}
 
-      {!isLoading && !fetchError && posts.length ? (
+      {!isLoading && !fetchError && searchResults.length ? (
         <div className='blog-posts grid'>
-          <Feed className='post' posts={posts} />
+          <Feed className='post' posts={searchResults} />
         </div>
       ) : (
         <h3>No Posts To Show</h3>
