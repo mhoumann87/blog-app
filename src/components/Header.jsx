@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
 import { FaLaptop, FaTabletAlt, FaMobileAlt } from 'react-icons/fa';
-import { useContext } from 'react';
-import DataContext from '../context/DataContext';
+import useWindowSize from '../hooks/useWindowSize';
 
 import Nav from './Nav';
 
-const Header = ({ title, search, setSearch }) => {
-  const { width } = useContext(DataContext);
+const Header = ({ title }) => {
+  const { width } = useWindowSize();
   return (
     <header>
       <div className='container flex'>

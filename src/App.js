@@ -13,9 +13,8 @@ import { Route, Routes } from 'react-router-dom';
 function App() {
   return (
     <>
+      <Header title={'Blog APP'} />
       <DataProvider>
-        <Header title={'Blog APP'} />
-
         <Routes>
           <Route path='/' element={<Home />} />
 
@@ -29,8 +28,8 @@ function App() {
 
           <Route path='*' element={<Missing />} />
         </Routes>
-        <Footer />
       </DataProvider>
+      <Footer />
     </>
   );
 }
