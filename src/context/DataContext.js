@@ -11,8 +11,7 @@ export const DataProvider = ({ children }) => {
   const [search, setSearch] = useState('');
   const [posts, setPosts] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-  const [postTitle, setPostTitle] = useState('');
-  const [postBody, setPostBody] = useState('');
+
   const [editTitle, setEditTitle] = useState('');
   const [editBody, setEditBody] = useState('');
 
@@ -35,32 +34,6 @@ export const DataProvider = ({ children }) => {
 
     setSearchResults(filteredResults.reverse());
   }, [posts, search]);
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    // Set and id based on the previous posts
-    const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
-    // Find datetime
-    const datetime = format(new Date(), 'MMMM dd yyyy pp');
-    // create the new post
-    const newPost = { id, title: postTitle, datetime, body: postBody };
-    // Update the database
-    try {
-      const response = await api.post('/posts', newPost);
-      // create a new array with all posts
-      const allPosts = [...posts, response.data];
-      // update the post array
-      setPosts(allPosts);
-      // Clear the fields in the form
-      setPostTitle('');
-      setPostBody('');
-      // Go back to the frontpage
-      navigate('/');
-    } catch (err) {
-      console.log(`Error: ${err}`);
-    }
-  };
 
   const handleEdit = async id => {
     const datetime = format(new Date(), 'MMMM dd, yyyy pp');
@@ -102,11 +75,7 @@ export const DataProvider = ({ children }) => {
         fetchError,
         searchResults,
         posts,
-        postBody,
-        setPostBody,
-        postTitle,
-        setPostTitle,
-        handleSubmit,
+        setPosts,
         handleEdit,
         editBody,
         editTitle,
