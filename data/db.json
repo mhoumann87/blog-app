@@ -26,9 +26,15 @@
     },
     {
       "id": 8,
-      "title": "Testing refactoring of new post",
-      "datetime": "April 29 2023 1:42:02 PM",
-      "body": "Now that we have moved all the functionality from out DataContext to the NewPost component, we need to check to see if everything still is working."
+      "title": "Testing refactoring of new post. Edit 2",
+      "datetime": "April 30, 2023 11:40:09 AM",
+      "body": "Edited version.\nNow that we have moved all the functionality from out DataContext to the NewPost component, we need to check to see if everything still is working."
+    },
+    {
+      "id": 10,
+      "title": "Testing the update",
+      "datetime": "April 30 2023 11:27:18 AM",
+      "body": "Testing the functionality after changing the app to use easy-peasy package"
     }
   ]
 }

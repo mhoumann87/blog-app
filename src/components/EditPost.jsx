@@ -1,19 +1,22 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
-import api from '../api/posts';
-import DataContext from '../context/DataContext';
+import { useStoreState, useStoreActions } from 'easy-peasy';
 
 const EditPost = () => {
-  const { posts, setPosts } = useContext(DataContext);
-  const [editTitle, setEditTitle] = useState('');
-  const [editBody, setEditBody] = useState('');
-  const navigate = useNavigate();
-
   // Get id from parameters
   const { id } = useParams();
+  const navigate = useNavigate();
+  const editTitle = useStoreState(state => state.editTitle);
+  const editBody = useStoreState(state => state.editBody);
+
+  const editPost = useStoreActions(actions => actions.editPost);
+  const setEditTitle = useStoreActions(actions => actions.setEditTitle);
+  const setEditBody = useStoreActions(actions => actions.setEditBody);
+
   // Get the post to edit
-  const post = posts.find(post => post.id.toString() === id);
+  const getPostById = useStoreState(state => state.getPostById);
+  const post = getPostById(id);
 
   useEffect(() => {
     if (post) {
@@ -25,18 +28,10 @@ const EditPost = () => {
   const handleEdit = async id => {
     const datetime = format(new Date(), 'MMMM dd, yyyy pp');
     const editedPost = { id, title: editTitle, datetime, body: editBody };
+    editPost(editedPost);
 
-    try {
-      const response = await api.put(`/posts/${id}`, editedPost);
-      setPosts(
-        posts.map(post => (post.id === id ? { ...response.data } : post))
-      );
-      setEditTitle('');
-      setEditBody('');
-      navigate('/');
-    } catch (err) {
-      console.log(`Error: ${err}`);
-    }
+    // Go back to the post
+    navigate(`/post/${id}`);
   };
 
   return (
@@ -70,7 +65,7 @@ const EditPost = () => {
               onChange={e => setEditBody(e.target.value)}
             />
             <button
-              type='submit'
+              type='button'
               onClick={() => handleEdit(post.id)}
               className='shadow'>
               Submit
